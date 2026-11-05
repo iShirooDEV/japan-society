@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#e0111f">
+<title>Panel de owners · JAPAN Society™</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070708;--bg2:#101012;--card:#141416;--line:#2b1518;--red:#e0111f;--red2:#ff3b4a;--ink:#f5f5f5;--mute:#a99ea0;--ok:#35c46d;--gold:#e8bd5c;
+--head:'Montserrat','Segoe UI',system-ui,sans-serif;--body:'Zen Kaku Gothic New','Hiragino Sans','Yu Gothic',system-ui,sans-serif;
+color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:radial-gradient(ellipse at 50% 0,#2a0a0e,transparent 60%),var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;min-height:100vh}
+a{color:inherit}
+.top{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;padding:10px 18px;background:#070708e6;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top img{width:34px;height:34px;border-radius:50%}
+.brand{font-family:var(--head);font-weight:800;letter-spacing:.06em}
+.brand small{font-weight:300;letter-spacing:.02em;color:var(--mute)}
+.who{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--mute)}
+.who img{width:30px;height:30px;border-radius:50%;border:2px solid var(--red)}
+.btn{display:inline-block;padding:8px 18px;border-radius:99px;background:var(--red);color:#fff;text-decoration:none;font-family:var(--head);font-weight:700;font-size:.82rem;border:2px solid var(--red);cursor:pointer}
+.btn:hover{box-shadow:0 6px 20px #e0111f55}
+.btn.ghost{background:transparent;border-color:#ffffff40}
+.btn.ghost:hover{border-color:var(--red2);box-shadow:none}
+.btn:disabled{opacity:.55;cursor:not-allowed;box-shadow:none}
+.center{max-width:520px;margin:12vh auto;padding:0 18px;text-align:center}
+.center h1{font-family:var(--head);font-weight:800;margin:0 0 8px}
+.center p{color:var(--mute)}
+.layout{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:16px;max-width:1200px;margin:16px auto;padding:0 16px}
+@media(max-width:820px){.layout{grid-template-columns:1fr}}
+.pane{background:linear-gradient(160deg,#18181b,#101012);border:1px solid var(--line);border-radius:16px;padding:14px;min-width:0}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:5px 12px;border-radius:99px;cursor:pointer;font:inherit;font-size:.8rem}
+.tab.on{background:var(--red);border-color:var(--red)}
+.list{display:grid;gap:8px;max-height:70vh;overflow:auto}
+.item{display:grid;gap:2px;text-align:left;width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;color:var(--ink);cursor:pointer;font:inherit}
+.item:hover{border-color:var(--red)}
+.item.sel{border-color:var(--red2);box-shadow:0 0 0 1px var(--red2) inset}
+.item b{font-family:var(--head);font-size:.92rem}
+.item small,.muted{color:var(--mute);font-size:.8rem}
+.badge{display:inline-block;font-size:.72rem;padding:2px 10px;border-radius:99px;border:1px solid var(--line);color:var(--mute);width:max-content}
+.badge.new{color:var(--red2);border-color:var(--red2)}
+.badge.claimed{color:var(--gold);border-color:var(--gold)}
+.badge.answered{color:var(--ok);border-color:var(--ok)}
+.badge.closed{color:var(--mute)}
+.empty{color:var(--mute);text-align:center;padding:30px 10px}
+.detail h2{font-family:var(--head);font-size:1.25rem;margin:4px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px 14px;color:var(--mute);font-size:.85rem;margin-bottom:12px;align-items:center}
+.body{white-space:pre-wrap;word-break:break-word;background:#0d0d0f;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.rep{border-left:3px solid var(--red);background:#120a0c;border-radius:0 12px 12px 0;padding:8px 14px;margin-top:10px}
+.rep .t{white-space:pre-wrap;word-break:break-word}
+.err,.okm{margin:10px 0;padding:10px 14px;border-radius:12px;border:1px solid var(--red2)}
+.okm{border-color:var(--ok)}
+textarea{width:100%;min-height:120px;resize:vertical;background:#0d0d0f;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:11px 14px;font:inherit}
+textarea:focus{outline:none;border-color:var(--red)}
+h3{font-family:var(--head);font-size:.95rem;margin:16px 0 6px}
+</style>
+</head>
+<body>
+<div id="app"><div class="center"><p>Cargando…</p></div></div>
+<script>
+(function(){
+  var app=document.getElementById('app');
+  var LOGO='data:image/jpeg;base64,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';
+  var STATUS={new:'Nuevo',claimed:'En atención',answered:'Respondido',closed:'Cerrado'};
+  var DELIVERY={sent:'✅ Entregada por mensaje directo',closed_dms:'⚠️ Tiene los mensajes directos cerrados; la verá en la web',not_found:'⚠️ No se encontró al usuario',error:'⚠️ Falló el envío por mensaje directo',pending:'⏳ En cola: el bot la enviará en unos segundos'};
+  var FILTERS=[['all','Todos'],['new','Nuevos'],['claimed','En atención'],['answered','Respondidos'],['closed','Cerrados']];
+  var state={me:null,filter:'all',messages:[],selected:null,detail:null,draft:{},notice:null,timer:null};
+  var ui={};
+
+  function el(tag,attrs,kids){
+    var e=document.createElement(tag);
+    Object.keys(attrs||{}).forEach(function(k){
+      var v=attrs[k];
+      if(k==='text')e.textContent=v;else if(k==='value')e.value=v;else e.setAttribute(k,v);
+    });
+    (kids||[]).forEach(function(c){e.appendChild(typeof c==='string'?document.createTextNode(c):c)});
+    return e;
+  }
+  function clear(node){while(node.firstChild)node.removeChild(node.firstChild)}
+  function fmt(ts){try{return new Date(ts).toLocaleString('es',{dateStyle:'medium',timeStyle:'short'})}catch(e){return ''}}
+  function api(path,opts){
+    opts=opts||{};opts.credentials='same-origin';
+    return fetch(path,opts).then(function(r){return r.json().then(function(j){return {status:r.status,data:j}})});
+  }
+  function post(body){
+    return api('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  }
+  function badge(status){return el('span',{'class':'badge '+status,text:STATUS[status]||status})}
+
+  function screen(title,text,links){
+    clear(app);
+    var box=el('div',{'class':'center'},[el('h1',{text:title}),el('p',{text:text})]);
+    (links||[]).forEach(function(l){box.appendChild(el('a',{'class':l.ghost?'btn ghost':'btn',href:l.href,text:l.text}));box.appendChild(document.createTextNode(' '))});
+    app.appendChild(box);
+  }
+
+  /* ---------- lista ---------- */
+  function visible(){
+    return state.messages.filter(function(m){return state.filter==='all'||m.status===state.filter});
+  }
+  function renderTabs(){
+    clear(ui.tabs);
+    FILTERS.forEach(function(f){
+      var count=f[0]==='all'?state.messages.length:state.messages.filter(function(m){return m.status===f[0]}).length;
+      var b=el('button',{'class':'tab'+(state.filter===f[0]?' on':''),type:'button',text:f[1]+' ('+count+')'});
+      b.addEventListener('click',function(){state.filter=f[0];renderTabs();renderList()});
+      ui.tabs.appendChild(b);
+    });
+  }
+  function renderList(){
+    clear(ui.list);
+    var items=visible();
+    if(!items.length){ui.list.appendChild(el('div',{'class':'empty',text:'No hay mensajes en esta vista.'}));return}
+    items.forEach(function(m){
+      var b=el('button',{'class':'item'+(state.selected===m.id?' sel':''),type:'button'},[
+        el('b',{text:m.subject||'(sin asunto)'}),
+        el('small',{text:'De '+m.name+' · '+fmt(m.created)}),
+        badge(m.status),
+        el('small',{text:m.claimed_name?'Atiende: '+m.claimed_name:'Sin atender'})
+      ]);
+      b.addEventListener('click',function(){select(m.id)});
+      ui.list.appendChild(b);
+    });
+  }
+  function loadList(){
+    return api('/api/admin?action=list').then(function(r){
+      if(r.status===401||r.status===403){init();return}
+      if(r.status!==200)return;
+      state.messages=r.data.messages||[];
+      renderTabs();renderList();
+    }).catch(function(){});
+  }
+
+  /* ---------- detalle ---------- */
+  function select(id){
+    state.selected=id;state.notice=null;renderList();
+    return loadDetail();
+  }
+  function loadDetail(){
+    if(!state.selected)return Promise.resolve();
+    var id=state.selected;
+    return api('/api/admin?action=get&id='+encodeURIComponent(id)).then(function(r){
+      if(state.selected!==id)return;
+      if(r.status!==200){state.detail=null;state.notice={err:true,text:r.data.message||'No se pudo cargar el mensaje.'};renderDetail();return}
+      state.detail=r.data;renderDetail();
+    }).catch(function(){state.notice={err:true,text:'No se pudo cargar el mensaje.'};renderDetail()});
+  }
+  function act(body,okText){
+    return post(body).then(function(r){
+      if(r.status===200){state.notice={err:false,text:okText};if(body.action==='reply')delete state.draft[body.id];return Promise.all([loadList(),loadDetail()])}
+      if(r.status===401||r.status===403){init();return}
+      state.notice={err:true,text:r.data.message||'No se pudo completar la acción.'};renderDetail();
+    }).catch(function(){state.notice={err:true,text:'No se pudo completar la acción.'};renderDetail()});
+  }
+  function renderDetail(){
+    clear(ui.detail);
+    if(!state.selected){ui.detail.appendChild(el('div',{'class':'empty',text:'Elige un mensaje de la lista para verlo y responder.'}));return}
+    if(!state.detail){if(state.notice)ui.detail.appendChild(el('div',{'class':'err',text:state.notice.text}));return}
+    var m=state.detail.message,me=state.me;
+    var box=el('div',{'class':'detail'});
+    box.appendChild(el('h2',{text:m.subject||'(sin asunto)'}));
+    box.appendChild(el('div',{'class':'meta'},[
+      badge(m.status),
+      el('span',{text:'De '+m.name+' (@'+m.username+' · '+m.user_id+')'}),
+      el('span',{text:fmt(m.created)}),
+      el('span',{text:m.claimed_name?'Atiende: '+m.claimed_name:'Sin atender'})
+    ]));
+    box.appendChild(el('div',{'class':'body',text:m.message}));
+
+    if(state.notice)box.appendChild(el('div',{'class':state.notice.err?'err':'okm',text:state.notice.text}));
+
+    var actions=el('div',{'class':'actions'});
+    if(m.status!=='closed'){
+      if(!m.claimed_by){
+        var a=el('button',{'class':'btn',type:'button',text:'Atender'});
+        a.addEventListener('click',function(){act({action:'claim',id:m.id},'Ahora atiendes este mensaje.')});
+        actions.appendChild(a);
+      }else if(m.claimed_by!==me.id){
+        var t=el('button',{'class':'btn ghost',type:'button',text:'Tomar (lo atiende '+m.claimed_name+')'});
+        t.addEventListener('click',function(){
+          if(window.confirm('¿Tomar este mensaje? Lo atiende '+m.claimed_name+'.'))act({action:'takeover',id:m.id},'Ahora atiendes este mensaje.');
+        });
+        actions.appendChild(t);
+      }
+      var c=el('button',{'class':'btn ghost',type:'button',text:'Cerrar'});
+      c.addEventListener('click',function(){
+        if(window.confirm('¿Cerrar este mensaje? Ya no se podrá responder.'))act({action:'close',id:m.id},'Mensaje cerrado.');
+      });
+      actions.appendChild(c);
+    }
+    box.appendChild(actions);
+
+    box.appendChild(el('h3',{text:'Respuestas ('+state.detail.replies.length+')'}));
+    if(!state.detail.replies.length)box.appendChild(el('div',{'class':'muted',text:'Todavía no hay respuestas.'}));
+    state.detail.replies.forEach(function(r){
+      box.appendChild(el('div',{'class':'rep'},[
+        el('div',{'class':'muted',text:r.by_name+' · '+fmt(r.at)}),
+        el('div',{'class':'t',text:r.text}),
+        el('div',{'class':'muted',text:DELIVERY[r.delivery]||r.delivery})
+      ]));
+    });
+
+    if(m.status!=='closed'){
+      var canReply=!m.claimed_by||m.claimed_by===me.id;
+      box.appendChild(el('h3',{text:'Responder'}));
+      if(!canReply){
+        box.appendChild(el('div',{'class':'muted',text:'Lo atiende '+m.claimed_name+'. Pulsa «Tomar» si quieres responder tú.'}));
+      }else{
+        var ta=el('textarea',{maxlength:'1800',placeholder:'Escribe la respuesta. El bot se la enviará al usuario por mensaje directo de Discord.',value:state.draft[m.id]||''});
+        ta.addEventListener('input',function(){state.draft[m.id]=ta.value});
+        var send=el('button',{'class':'btn',type:'button',text:'Enviar respuesta por Discord'});
+        send.addEventListener('click',function(){
+          var text=String(ta.value||'').trim();
+          if(!text){state.notice={err:true,text:'Escribe una respuesta antes de enviar.'};renderDetail();return}
+          send.disabled=true;
+          act({action:'reply',id:m.id,text:text},'Respuesta enviada. El bot la entregará al usuario en unos segundos.').then(function(){
+            setTimeout(function(){loadDetail()},4000);
+          });
+        });
+        box.appendChild(ta);
+        box.appendChild(el('div',{'class':'actions'},[send]));
+      }
+    }
+    ui.detail.appendChild(box);
+  }
+
+  /* ---------- arranque ---------- */
+  function build(){
+    clear(app);
+    var logout=el('a',{'class':'btn ghost',href:'/api/logout',text:'Salir'});
+    app.appendChild(el('div',{'class':'top'},[
+      el('img',{src:LOGO,alt:'Logo de JAPAN Society'}),
+      el('span',{'class':'brand'},[document.createTextNode('JAPAN '),el('small',{text:'Society™ · Panel de owners'})]),
+      el('div',{'class':'who'},[el('img',{src:state.me.avatar,alt:'Tu avatar'}),el('span',{text:state.me.name}),logout])
+    ]));
+    ui.tabs=el('div',{'class':'tabs'});
+    ui.list=el('div',{'class':'list'});
+    ui.detail=el('div',{'class':'pane'});
+    var refresh=el('button',{'class':'tab',type:'button',text:'↻ Actualizar'});
+    refresh.addEventListener('click',function(){loadList()});
+    app.appendChild(el('div',{'class':'layout'},[
+      el('div',{'class':'pane'},[ui.tabs,ui.list,el('div',{'class':'actions'},[refresh])]),
+      ui.detail
+    ]));
+    renderTabs();renderList();renderDetail();
+    loadList();
+    if(state.timer)clearInterval(state.timer);
+    state.timer=setInterval(loadList,20000);
+  }
+  function init(){
+    if(state.timer){clearInterval(state.timer);state.timer=null}
+    var failed=new URLSearchParams(location.search).get('login')==='error';
+    api('/api/admin?action=me').then(function(r){
+      if(r.status===401)return screen('Panel de owners',failed?'No pudimos iniciar tu sesión. Inténtalo de nuevo.':'Inicia sesión con Discord para entrar.',[{href:'/api/login?next=admin',text:'Iniciar sesión con Discord'}]);
+      if(r.status===403)return screen('Sin acceso','Tu cuenta de Discord no es owner de JAPAN Society™.',[{href:'/api/logout',text:'Cerrar sesión',ghost:true},{href:'/',text:'Volver a la web',ghost:true}]);
+      if(r.status!==200||!r.data.owner)return screen('No disponible','El panel no está disponible en este momento.',[{href:'/',text:'Volver a la web',ghost:true}]);
+      state.me=r.data;build();
+    }).catch(function(){screen('No disponible','El panel no está disponible en este momento.',[{href:'/',text:'Volver a la web',ghost:true}])});
+  }
+  init();
+})();
+</script>
+</body>
+</html>
