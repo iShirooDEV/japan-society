@@ -59,6 +59,23 @@ a{color:inherit}
 textarea{width:100%;min-height:120px;resize:vertical;background:#0d0d0f;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:11px 14px;font:inherit}
 textarea:focus{outline:none;border-color:var(--red)}
 h3{font-family:var(--head);font-size:.95rem;margin:16px 0 6px}
+.nav{display:flex;gap:6px;margin-left:12px;flex-wrap:wrap}
+.nav button{border:1px solid var(--line);background:transparent;color:var(--mute);padding:6px 14px;border-radius:99px;cursor:pointer;font:inherit;font-size:.85rem}
+.nav button.on{background:var(--red);border-color:var(--red);color:#fff}
+.banner{margin:0 0 12px;padding:10px 14px;border-radius:12px;border:1px solid var(--gold);color:var(--gold);font-size:.88rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+.stat b{display:block;font-family:var(--head);font-size:1.7rem;color:var(--red2);line-height:1.2}
+.stat span{color:var(--mute);font-size:.8rem}
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.chart h3{margin-top:0}
+.row{display:grid;grid-template-columns:110px 1fr 36px;gap:8px;align-items:center;margin:6px 0;font-size:.82rem}
+.row .lbl{color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .track{background:#0d0d0f;border-radius:99px;height:10px;overflow:hidden;border:1px solid var(--line)}
+.row .fill{height:100%;background:linear-gradient(90deg,var(--red),var(--red2));border-radius:99px}
+.row .num{text-align:right}
+.full{max-width:1200px;margin:16px auto;padding:0 16px}
+.top .nav{margin-left:8px}
 </style>
 </head>
 <body>
@@ -67,12 +84,17 @@ h3{font-family:var(--head);font-size:.95rem;margin:16px 0 6px}
 (function(){
   var app=document.getElementById('app');
   var LOGO='data:image/jpeg;base64,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';
-  var STATUS={new:'Nuevo',claimed:'En atención',answered:'Respondido',closed:'Cerrado'};
+  var STATUS={'new':'Nuevo',claimed:'En atención',answered:'Respondido',closed:'Cerrado'};
   var DELIVERY={sent:'✅ Entregada por mensaje directo',closed_dms:'⚠️ Tiene los mensajes directos cerrados; la verá en la web',not_found:'⚠️ No se encontró al usuario',error:'⚠️ Falló el envío por mensaje directo',pending:'⏳ En cola: el bot la enviará en menos de un minuto'};
+  var KIND={soporte:'Soporte',alianza:'Alianza',bot:'Pedir un bot',otro:'Otro'};
   var FILTERS=[['all','Todos'],['new','Nuevos'],['claimed','En atención'],['answered','Respondidos'],['closed','Cerrados']];
-  var state={me:null,filter:'all',messages:[],selected:null,detail:null,draft:{},notice:null,timer:null};
+  var TFILTERS=[['open','Abiertos'],['closed','Cerrados'],['all','Todos']];
+  var VIEWS=[['messages','Mensajes'],['tickets','Tickets'],['stats','Estadísticas']];
+  var state={me:null,view:'messages',filter:'all',messages:[],selected:null,detail:null,draft:{},notice:null,
+    board:null,fresh:true,age:null,tFilter:'open',tSelected:null,tNotice:null,tDraft:{},timer:null};
   var ui={};
 
+  /* ---------- utilidades ---------- */
   function el(tag,attrs,kids){
     var e=document.createElement(tag);
     Object.keys(attrs||{}).forEach(function(k){
@@ -83,7 +105,22 @@ h3{font-family:var(--head);font-size:.95rem;margin:16px 0 6px}
     return e;
   }
   function clear(node){while(node.firstChild)node.removeChild(node.firstChild)}
-  function fmt(ts){try{return new Date(ts).toLocaleString('es',{dateStyle:'medium',timeStyle:'short'})}catch(e){return ''}}
+  function fmt(ts){
+    if(!ts)return '';
+    var ms=ts<1e11?ts*1000:ts;
+    try{return new Date(ms).toLocaleString('es',{dateStyle:'medium',timeStyle:'short'})}catch(e){return ''}
+  }
+  function fmtDur(sec){
+    if(sec===null||sec===undefined||isNaN(sec))return '—';
+    sec=Math.round(sec);
+    if(sec<60)return sec+' s';
+    var m=Math.round(sec/60);
+    if(m<60)return m+' min';
+    var h=Math.floor(m/60),rm=m%60;
+    if(h<24)return h+' h'+(rm?' '+rm+' min':'');
+    var d=Math.floor(h/24),rh=h%24;
+    return d+' d'+(rh?' '+rh+' h':'');
+  }
   function api(path,opts){
     opts=opts||{};opts.credentials='same-origin';
     return fetch(path,opts).then(function(r){return r.json().then(function(j){return {status:r.status,data:j}})});
@@ -91,7 +128,8 @@ h3{font-family:var(--head);font-size:.95rem;margin:16px 0 6px}
   function post(body){
     return api('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
   }
-  function badge(status){return el('span',{'class':'badge '+status,text:STATUS[status]||status})}
+  function badge(status,text){return el('span',{'class':'badge '+status,text:text||STATUS[status]||status})}
+  function confirmBox(text){return typeof window!=='undefined'&&window.confirm?window.confirm(text):true}
 
   function screen(title,text,links){
     clear(app);
@@ -100,10 +138,8 @@ h3{font-family:var(--head);font-size:.95rem;margin:16px 0 6px}
     app.appendChild(box);
   }
 
-  /* ---------- lista ---------- */
-  function visible(){
-    return state.messages.filter(function(m){return state.filter==='all'||m.status===state.filter});
-  }
+  /* ================= MENSAJES ================= */
+  function visible(){return state.messages.filter(function(m){return state.filter==='all'||m.status===state.filter})}
   function renderTabs(){
     clear(ui.tabs);
     FILTERS.forEach(function(f){
@@ -133,20 +169,16 @@ h3{font-family:var(--head);font-size:.95rem;margin:16px 0 6px}
       if(r.status===401||r.status===403){init();return}
       if(r.status!==200)return;
       state.messages=r.data.messages||[];
-      renderTabs();renderList();
+      if(state.view==='messages'&&ui.list){renderTabs();renderList()}
+      if(state.view==='stats'&&ui.stats)renderStats();
     }).catch(function(){});
   }
-
-  /* ---------- detalle ---------- */
-  function select(id){
-    state.selected=id;state.notice=null;renderList();
-    return loadDetail();
-  }
+  function select(id){state.selected=id;state.notice=null;renderList();return loadDetail()}
   function loadDetail(){
     if(!state.selected)return Promise.resolve();
     var id=state.selected;
     return api('/api/admin?action=get&id='+encodeURIComponent(id)).then(function(r){
-      if(state.selected!==id)return;
+      if(state.selected!==id||state.view!=='messages')return;
       if(r.status!==200){state.detail=null;state.notice={err:true,text:r.data.message||'No se pudo cargar el mensaje.'};renderDetail();return}
       state.detail=r.data;renderDetail();
     }).catch(function(){state.notice={err:true,text:'No se pudo cargar el mensaje.'};renderDetail()});
@@ -172,7 +204,6 @@ h3{font-family:var(--head);font-size:.95rem;margin:16px 0 6px}
       el('span',{text:m.claimed_name?'Atiende: '+m.claimed_name:'Sin atender'})
     ]));
     box.appendChild(el('div',{'class':'body',text:m.message}));
-
     if(state.notice)box.appendChild(el('div',{'class':state.notice.err?'err':'okm',text:state.notice.text}));
 
     var actions=el('div',{'class':'actions'});
@@ -184,13 +215,13 @@ h3{font-family:var(--head);font-size:.95rem;margin:16px 0 6px}
       }else if(m.claimed_by!==me.id){
         var t=el('button',{'class':'btn ghost',type:'button',text:'Tomar (lo atiende '+m.claimed_name+')'});
         t.addEventListener('click',function(){
-          if(window.confirm('¿Tomar este mensaje? Lo atiende '+m.claimed_name+'.'))act({action:'takeover',id:m.id},'Ahora atiendes este mensaje.');
+          if(confirmBox('¿Tomar este mensaje? Lo atiende '+m.claimed_name+'.'))act({action:'takeover',id:m.id},'Ahora atiendes este mensaje.');
         });
         actions.appendChild(t);
       }
       var c=el('button',{'class':'btn ghost',type:'button',text:'Cerrar'});
       c.addEventListener('click',function(){
-        if(window.confirm('¿Cerrar este mensaje? Ya no se podrá responder.'))act({action:'close',id:m.id},'Mensaje cerrado.');
+        if(confirmBox('¿Cerrar este mensaje? Ya no se podrá responder.'))act({action:'close',id:m.id},'Mensaje cerrado.');
       });
       actions.appendChild(c);
     }
@@ -229,29 +260,281 @@ h3{font-family:var(--head);font-size:.95rem;margin:16px 0 6px}
     }
     ui.detail.appendChild(box);
   }
-
-  /* ---------- arranque ---------- */
-  function build(){
-    clear(app);
-    var logout=el('a',{'class':'btn ghost',href:'/api/logout',text:'Salir'});
-    app.appendChild(el('div',{'class':'top'},[
-      el('img',{src:LOGO,alt:'Logo de JAPAN Society'}),
-      el('span',{'class':'brand'},[document.createTextNode('JAPAN '),el('small',{text:'Society™ · Panel de owners'})]),
-      el('div',{'class':'who'},[el('img',{src:state.me.avatar,alt:'Tu avatar'}),el('span',{text:state.me.name}),logout])
-    ]));
+  function buildMessages(){
     ui.tabs=el('div',{'class':'tabs'});
     ui.list=el('div',{'class':'list'});
     ui.detail=el('div',{'class':'pane'});
+    ui.stats=null;
     var refresh=el('button',{'class':'tab',type:'button',text:'↻ Actualizar'});
     refresh.addEventListener('click',function(){loadList()});
-    app.appendChild(el('div',{'class':'layout'},[
+    ui.main.appendChild(el('div',{'class':'layout'},[
       el('div',{'class':'pane'},[ui.tabs,ui.list,el('div',{'class':'actions'},[refresh])]),
       ui.detail
     ]));
     renderTabs();renderList();renderDetail();
     loadList();
+  }
+
+  /* ================= TICKETS DE DISCORD ================= */
+  function allTickets(){
+    var b=state.board;
+    if(!b)return [];
+    var open=(b.open||[]).map(function(t){t._open=true;return t});
+    var closed=(b.closed||[]).map(function(t){t._open=false;return t});
+    if(state.tFilter==='open')return open;
+    if(state.tFilter==='closed')return closed;
+    return open.concat(closed);
+  }
+  function findTicket(id){
+    var b=state.board;
+    if(!b)return null;
+    var all=(b.open||[]).concat(b.closed||[]);
+    for(var i=0;i<all.length;i++){if(all[i].channel_id===id){all[i]._open=(b.open||[]).indexOf(all[i])!==-1;return all[i]}}
+    return null;
+  }
+  function ticketTitle(t){return '#'+String(t.number||0).padStart(4,'0')+' · '+(KIND[t.kind]||t.kind||'Ticket')}
+  function renderTicketTabs(){
+    clear(ui.ttabs);
+    var b=state.board||{open:[],closed:[]};
+    TFILTERS.forEach(function(f){
+      var count=f[0]==='open'?(b.open||[]).length:f[0]==='closed'?(b.closed||[]).length:(b.open||[]).length+(b.closed||[]).length;
+      var x=el('button',{'class':'tab'+(state.tFilter===f[0]?' on':''),type:'button',text:f[1]+' ('+count+')'});
+      x.addEventListener('click',function(){state.tFilter=f[0];renderTicketTabs();renderTicketList()});
+      ui.ttabs.appendChild(x);
+    });
+  }
+  function renderBanner(){
+    clear(ui.banner);
+    if(!state.board){ui.banner.appendChild(el('div',{'class':'banner',text:'El bot todavía no ha publicado los tickets. Comprueba que esté encendido y que tenga la versión nueva.'}));return}
+    if(!state.fresh)ui.banner.appendChild(el('div',{'class':'banner',text:'Los datos son de hace '+fmtDur(state.age)+': el bot puede estar apagado.'}));
+  }
+  function renderTicketList(){
+    clear(ui.tlist);
+    var items=allTickets();
+    if(!items.length){ui.tlist.appendChild(el('div',{'class':'empty',text:'No hay tickets en esta vista.'}));return}
+    items.forEach(function(t){
+      var st=t._open?(t.claimed_name?'Atiende: '+t.claimed_name:'Sin atender'):'Cerrado'+(t.closed_name?' por '+t.closed_name:'');
+      var b=el('button',{'class':'item'+(state.tSelected===t.channel_id?' sel':''),type:'button'},[
+        el('b',{text:ticketTitle(t)}),
+        el('small',{text:(t.owner_name||'Usuario')+' · '+fmt(t.created)+(t.web?' · 🌐 Web':'')}),
+        badge(t._open?(t.claimed_by?'claimed':'new'):'closed',t._open?(t.claimed_by?'En atención':'Abierto'):'Cerrado'),
+        el('small',{text:st})
+      ]);
+      b.addEventListener('click',function(){state.tSelected=t.channel_id;state.tNotice=null;renderTicketList();renderTicketDetail()});
+      ui.tlist.appendChild(b);
+    });
+  }
+  function loadBoard(){
+    return api('/api/admin?action=tickets').then(function(r){
+      if(r.status===401||r.status===403){init();return}
+      if(r.status!==200)return;
+      state.board=r.data.board||null;state.fresh=!!r.data.fresh;state.age=r.data.age_seconds;
+      if(state.view==='tickets'&&ui.tlist){renderBanner();renderTicketTabs();renderTicketList();renderTicketDetail()}
+      if(state.view==='stats'&&ui.stats)renderStats();
+    }).catch(function(){});
+  }
+  function pollJob(id,tries){
+    return api('/api/admin?action=jobresult&id='+encodeURIComponent(id)).then(function(r){
+      if(r.status===200&&r.data.status&&r.data.status!=='pending')return r.data;
+      if(tries>=15)return {status:'error',message:'El bot tardó demasiado en responder. Revisa Discord y actualiza en un momento.'};
+      return new Promise(function(res){setTimeout(res,3000)}).then(function(){return pollJob(id,tries+1)});
+    });
+  }
+  function applyLocal(t,action){
+    var now=Math.floor(Date.now()/1000),me=state.me,b=state.board;
+    if(!t.claimed_by){t.claimed_by=me.id;t.claimed_name=me.name;t.claimed_at=now}
+    if(action==='t_close'&&b){
+      b.open=(b.open||[]).filter(function(x){return x.channel_id!==t.channel_id});
+      t.closed_at=now;t.closed_name=me.name;
+      b.closed=[t].concat(b.closed||[]);
+      state.tFilter=state.tFilter==='open'?'closed':state.tFilter;
+    }
+  }
+  function ticketAct(t,action,text){
+    state.tNotice={err:false,text:'Enviando al bot…'};renderTicketDetail();
+    var body={action:action,channel_id:t.channel_id};
+    if(action==='t_reply')body.text=text;
+    return post(body).then(function(r){
+      if(r.status===401||r.status===403){init();return}
+      if(r.status!==202){state.tNotice={err:true,text:r.data.message||'No se pudo enviar la acción.'};renderTicketDetail();return}
+      return pollJob(r.data.job_id,0).then(function(res){
+        if(res.status==='ok'){
+          applyLocal(t,action);
+          if(action==='t_reply')delete state.tDraft[t.channel_id];
+          state.tNotice={err:false,text:res.message||'Hecho.'};
+          renderTicketTabs();renderTicketList();renderTicketDetail();
+          setTimeout(function(){loadBoard()},18000);
+        }else{
+          state.tNotice={err:true,text:res.message||'El bot no pudo completar la acción.'};renderTicketDetail();
+        }
+      });
+    }).catch(function(){state.tNotice={err:true,text:'No se pudo enviar la acción.'};renderTicketDetail()});
+  }
+  function renderTicketDetail(){
+    clear(ui.tdetail);
+    var t=state.tSelected?findTicket(state.tSelected):null;
+    if(!t){ui.tdetail.appendChild(el('div',{'class':'empty',text:'Elige un ticket de la lista para verlo y gestionarlo.'}));return}
+    var me=state.me,box=el('div',{'class':'detail'});
+    box.appendChild(el('h2',{text:'Ticket '+ticketTitle(t)}));
+    var meta=[
+      badge(t._open?(t.claimed_by?'claimed':'new'):'closed',t._open?(t.claimed_by?'En atención':'Abierto'):'Cerrado'),
+      el('span',{text:'De '+(t.owner_name||'Usuario')+' ('+t.owner_id+')'}),
+      el('span',{text:fmt(t.created)}),
+      el('span',{text:t.web?'🌐 Abierto desde la web':'💬 Abierto en Discord'}),
+      el('span',{text:t.claimed_name?'Atiende: '+t.claimed_name:'Sin atender'})
+    ];
+    if(!t._open){meta.push(el('span',{text:'Cerrado'+(t.closed_name?' por '+t.closed_name:'')+(t.closed_at?' · '+fmt(t.closed_at)+' · duró '+fmtDur(t.closed_at-t.created):'')}))}
+    box.appendChild(el('div',{'class':'meta'},meta));
+    if(t.subject)box.appendChild(el('div',{'class':'body',text:t.subject}));
+    if(state.tNotice)box.appendChild(el('div',{'class':state.tNotice.err?'err':'okm',text:state.tNotice.text}));
+
+    var actions=el('div',{'class':'actions'});
+    if(t._open){
+      if(state.board&&state.board.guild_id)actions.appendChild(el('a',{'class':'btn ghost',href:'https://discord.com/channels/'+state.board.guild_id+'/'+t.channel_id,target:'_blank',rel:'noopener',text:'Abrir en Discord'}));
+      if(!t.claimed_by){
+        var a=el('button',{'class':'btn',type:'button',text:'Atender'});
+        a.addEventListener('click',function(){ticketAct(t,'t_claim')});
+        actions.appendChild(a);
+      }
+      var c=el('button',{'class':'btn ghost',type:'button',text:'Cerrar ticket'});
+      c.addEventListener('click',function(){
+        if(confirmBox('¿Cerrar este ticket? Se guardará la transcripción en el canal de logs y se eliminará el canal.'))ticketAct(t,'t_close');
+      });
+      actions.appendChild(c);
+    }
+    box.appendChild(actions);
+
+    if(t._open){
+      box.appendChild(el('h3',{text:'Responder en el ticket'}));
+      if(t.claimed_by&&t.claimed_by!==me.id){
+        box.appendChild(el('div',{'class':'muted',text:'Lo atiende '+(t.claimed_name||'otro miembro del staff')+'. Solo quien atiende un ticket puede responder desde aquí.'}));
+      }else{
+        var ta=el('textarea',{maxlength:'1500',placeholder:'Escribe la respuesta. El bot la publicará dentro del ticket y mencionará al usuario.',value:state.tDraft[t.channel_id]||''});
+        ta.addEventListener('input',function(){state.tDraft[t.channel_id]=ta.value});
+        var send=el('button',{'class':'btn',type:'button',text:'Enviar respuesta al ticket'});
+        send.addEventListener('click',function(){
+          var text=String(ta.value||'').trim();
+          if(!text){state.tNotice={err:true,text:'Escribe una respuesta antes de enviar.'};renderTicketDetail();return}
+          send.disabled=true;ticketAct(t,'t_reply',text);
+        });
+        box.appendChild(ta);
+        box.appendChild(el('div',{'class':'actions'},[send]));
+      }
+    }
+    ui.tdetail.appendChild(box);
+  }
+  function buildTickets(){
+    ui.ttabs=el('div',{'class':'tabs'});
+    ui.tlist=el('div',{'class':'list'});
+    ui.tdetail=el('div',{'class':'pane'});
+    ui.banner=el('div');
+    ui.stats=null;
+    var refresh=el('button',{'class':'tab',type:'button',text:'↻ Actualizar'});
+    refresh.addEventListener('click',function(){loadBoard()});
+    ui.main.appendChild(el('div',{'class':'layout'},[
+      el('div',{'class':'pane'},[ui.banner,ui.ttabs,ui.tlist,el('div',{'class':'actions'},[refresh])]),
+      ui.tdetail
+    ]));
+    renderBanner();renderTicketTabs();renderTicketList();renderTicketDetail();
+    loadBoard();
+  }
+
+  /* ================= ESTADÍSTICAS ================= */
+  function bars(title,rows){
+    var box=el('div',{'class':'pane chart'},[el('h3',{text:title})]);
+    var max=0;rows.forEach(function(r){if(r[1]>max)max=r[1]});
+    if(!rows.length||!max){box.appendChild(el('div',{'class':'muted',text:'Todavía no hay datos.'}));return box}
+    rows.forEach(function(r){
+      box.appendChild(el('div',{'class':'row'},[
+        el('span',{'class':'lbl',text:r[0]}),
+        el('div',{'class':'track'},[el('div',{'class':'fill',style:'width:'+Math.max(2,Math.round(r[1]/max*100))+'%'})]),
+        el('span',{'class':'num',text:String(r[1])})
+      ]));
+    });
+    return box;
+  }
+  function stat(value,label){return el('div',{'class':'stat'},[el('b',{text:String(value)}),el('span',{text:label})])}
+  function renderStats(){
+    clear(ui.stats);
+    var b=state.board,s=b&&b.stats?b.stats:null,msgs=state.messages;
+    if(!b)ui.stats.appendChild(el('div',{'class':'banner',text:'Aún no hay datos de tickets: el bot todavía no los ha publicado.'}));
+    else if(!state.fresh)ui.stats.appendChild(el('div',{'class':'banner',text:'Los datos de tickets son de hace '+fmtDur(state.age)+': el bot puede estar apagado.'}));
+
+    var replied=msgs.filter(function(m){return m.first_reply_at>0&&m.created>0&&m.first_reply_at>=m.created});
+    var avgReply=replied.length?replied.reduce(function(a,m){return a+(m.first_reply_at-m.created)/1000},0)/replied.length:null;
+    var answered=msgs.filter(function(m){return m.status==='answered'||m.status==='closed'}).length;
+    ui.stats.appendChild(el('div',{'class':'cards'},[
+      stat(s?s.open:'—','Tickets abiertos'),
+      stat(s?s.closed:'—','Tickets cerrados'),
+      stat(s?fmtDur(s.avg_first_response_s):'—','Primera respuesta en tickets'),
+      stat(s?fmtDur(s.avg_close_s):'—','Duración media de un ticket'),
+      stat(msgs.length,'Mensajes a owners'),
+      stat(answered,'Mensajes respondidos'),
+      stat(fmtDur(avgReply),'Primera respuesta a mensajes')
+    ]));
+
+    var kinds=s?Object.keys(s.by_kind||{}).map(function(k){return [KIND[k]||k,s.by_kind[k]]}):[];
+    var days=[];
+    if(s){
+      for(var i=13;i>=0;i--){
+        var d=new Date(Date.now()-i*86400000),key=d.toISOString().slice(0,10);
+        days.push([key.slice(5),(s.by_day||{})[key]||0]);
+      }
+    }
+    var owners=s?Object.keys(s.by_owner||{}).map(function(k){return [k,s.by_owner[k]]}).sort(function(a,b2){return b2[1]-a[1]}):[];
+    var byStatus=['new','claimed','answered','closed'].map(function(k){return [STATUS[k],msgs.filter(function(m){return m.status===k}).length]});
+    ui.stats.appendChild(el('div',{'class':'charts'},[
+      bars('Tickets por tipo',kinds),
+      bars('Tickets creados · últimos 14 días',days),
+      bars('Tickets atendidos por owner',owners),
+      bars('Mensajes por estado',byStatus)
+    ]));
+  }
+  function buildStats(){
+    ui.stats=el('div',{'class':'full'});
+    ui.list=null;ui.tlist=null;
+    ui.main.appendChild(ui.stats);
+    renderStats();
+    Promise.all([loadList(),loadBoard()]);
+  }
+
+  /* ================= ESTRUCTURA ================= */
+  function renderNav(){
+    clear(ui.nav);
+    VIEWS.forEach(function(v){
+      var b=el('button',{'class':state.view===v[0]?'on':'',type:'button',text:v[1]});
+      b.addEventListener('click',function(){setView(v[0])});
+      ui.nav.appendChild(b);
+    });
+  }
+  function setView(v){
+    state.view=v;
+    renderNav();
+    clear(ui.main);
+    if(v==='messages')buildMessages();
+    else if(v==='tickets')buildTickets();
+    else buildStats();
+  }
+  function refreshCurrent(){
+    if(typeof document!=='undefined'&&document.hidden)return;
+    if(state.view==='messages')loadList();
+    else if(state.view==='tickets')loadBoard();
+    else{loadList();loadBoard()}
+  }
+  function build(){
+    clear(app);
+    ui.nav=el('div',{'class':'nav'});
+    ui.main=el('div');
+    app.appendChild(el('div',{'class':'top'},[
+      el('img',{src:LOGO,alt:'Logo de JAPAN Society'}),
+      el('span',{'class':'brand'},[document.createTextNode('JAPAN '),el('small',{text:'Society™ · Panel de owners'})]),
+      ui.nav,
+      el('div',{'class':'who'},[el('img',{src:state.me.avatar,alt:'Tu avatar'}),el('span',{text:state.me.name}),el('a',{'class':'btn ghost',href:'/api/logout',text:'Salir'})])
+    ]));
+    app.appendChild(ui.main);
+    setView(state.view);
     if(state.timer)clearInterval(state.timer);
-    state.timer=setInterval(loadList,20000);
+    state.timer=setInterval(refreshCurrent,60000);
   }
   function init(){
     if(state.timer){clearInterval(state.timer);state.timer=null}
