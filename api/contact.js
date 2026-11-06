@@ -1,7 +1,7 @@
 'use strict';
 const crypto = require('crypto');
 const {
-  OUTBOX_KEY, MESSAGE_TTL, need, getSession, checkOrigin, readBody, send, redis, redisPipeline, hashObject,
+  OUTBOX_KEY, MESSAGE_TTL, MSGSUM_KEY, messageSummary, need, getSession, checkOrigin, readBody, send, redis, redisPipeline, hashObject,
 } = require('../lib/common');
 
 function parseJson(text) {
@@ -34,6 +34,10 @@ async function createMessage(req, res, session) {
     ['HSET', key, 'id', id, 'user_id', session.id, 'username', session.username, 'name', session.name,
       'subject', subject, 'message', message, 'created', Date.now(), 'status', 'new'],
     ['EXPIRE', key, MESSAGE_TTL],
+    ['HSET', MSGSUM_KEY, id, JSON.stringify(messageSummary({
+      id: id, user_id: session.id, username: session.username, name: session.name,
+      subject: subject, created: Date.now(), status: 'new',
+    }, 0))],
     ['LPUSH', 'js:msgs', id],
     ['LTRIM', 'js:msgs', 0, 499],
     ['LPUSH', mine, id],
