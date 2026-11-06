@@ -381,7 +381,7 @@ footer{text-align:left;background:#0a0a0b}
   function poll(id,tries){
     return api('/api/ticket?id='+encodeURIComponent(id)).then(function(r){
       if(r.status===200&&r.data.status!=='pending')return r.data;
-      if(tries>=20)return {status:'error',message:'El bot está tardando en responder. Revisa Discord en unos minutos: si el ticket ya se creó, lo verás allí.'};
+      if(tries>=30)return {status:'error',message:'El bot está tardando en responder. Revisa Discord en unos minutos: si el ticket ya se creó, lo verás allí.'};
       return new Promise(function(res){setTimeout(res,2000)}).then(function(){return poll(id,tries+1)});
     });
   }
@@ -451,7 +451,7 @@ footer{text-align:left;background:#0a0a0b}
       .catch(function(){/* sin API: se mantienen los textos iniciales */});
   }
   load();
-  setInterval(load,60000);
+  setInterval(function(){if(!document.hidden)load()},90000);
 })();
 </script>
 <script>
