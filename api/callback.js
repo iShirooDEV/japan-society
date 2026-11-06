@@ -1,16 +1,20 @@
 'use strict';
 const {
-  COOKIE, STATE_COOKIE, SESSION_DAYS, need, siteUrl, sign, parseCookies, setCookie, redirect,
+  COOKIE, STATE_COOKIE, NEXT_COOKIE, NEXT_TARGETS, SESSION_DAYS,
+  need, siteUrl, sign, parseCookies, setCookie, redirect,
 } = require('../lib/common');
 
 module.exports = async function handler(req, res) {
-  const fail = function () { redirect(res, '/?login=error#tickets'); };
+  const cookies = parseCookies(req);
+  const next = Object.prototype.hasOwnProperty.call(NEXT_TARGETS, cookies[NEXT_COOKIE]) ? cookies[NEXT_COOKIE] : '';
+  const fail = function () { redirect(res, next === 'admin' ? '/admin.html?login=error' : '/?login=error#tickets'); };
   try {
     const query = req.query || {};
     const code = String(query.code || '');
     const state = String(query.state || '');
-    const saved = parseCookies(req)[STATE_COOKIE];
+    const saved = cookies[STATE_COOKIE];
     setCookie(res, STATE_COOKIE, '', 0);
+    setCookie(res, NEXT_COOKIE, '', 0);
     if (!code || !state || !saved || state !== saved) return fail();
 
     const tokenResponse = await fetch('https://discord.com/api/oauth2/token', {
@@ -42,7 +46,7 @@ module.exports = async function handler(req, res) {
       exp: Date.now() + SESSION_DAYS * 24 * 3600 * 1000,
     };
     setCookie(res, COOKIE, sign(session), SESSION_DAYS * 24 * 3600);
-    redirect(res, '/#tickets');
+    redirect(res, NEXT_TARGETS[next] || '/#tickets');
   } catch (err) {
     console.error(err);
     fail();
