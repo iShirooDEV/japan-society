@@ -5,7 +5,7 @@
  * aunque ese archivo esté desactualizado.
  */
 const EXPECTED_EXPORTS = [
-  'VERSION', 'STATUS_KEY', 'OUTBOX_KEY', 'NEXT_TARGETS', 'redisPipeline', 'hashObject',
+  'VERSION', 'STATUS_KEY', 'OUTBOX_KEY', 'MSGSUM_KEY', 'BOARD_PREFIX', 'TRES_PREFIX', 'messageSummary', 'NEXT_TARGETS', 'redisPipeline', 'hashObject',
   'isOwner', 'checkOrigin', 'readBody', 'redisInfo',
 ];
 
@@ -79,4 +79,3 @@ module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   res.end(JSON.stringify(out, null, 2));
 };
-
