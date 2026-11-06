@@ -44,6 +44,7 @@ async function createTicket(req, res, session) {
 
   const id = crypto.randomUUID();
   await redis('LPUSH', QUEUE_KEY, JSON.stringify({
+    type: 'ticket',
     id: id,
     guild_id: need('GUILD_ID'),
     user_id: session.id,
