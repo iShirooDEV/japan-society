@@ -7,7 +7,8 @@ const {
 module.exports = async function handler(req, res) {
   const cookies = parseCookies(req);
   const next = Object.prototype.hasOwnProperty.call(NEXT_TARGETS, cookies[NEXT_COOKIE]) ? cookies[NEXT_COOKIE] : '';
-  const fail = function () { redirect(res, next === 'admin' ? '/admin.html?login=error' : '/?login=error#tickets'); };
+  const FAIL_TARGETS = { admin: '/admin.html?login=error', verify: '/verify.html?login=error' };
+  const fail = function () { redirect(res, FAIL_TARGETS[next] || '/?login=error#tickets'); };
   try {
     const query = req.query || {};
     const code = String(query.code || '');
