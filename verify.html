@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#e0111f">
+<title>Verificación · JAPAN Society™</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070708;--card:#141416;--line:#2b1518;--red:#e0111f;--red2:#ff3b4a;--ink:#f5f5f5;--mute:#a99ea0;--ok:#35c46d;
+--head:'Montserrat','Segoe UI',system-ui,sans-serif;--body:'Zen Kaku Gothic New','Hiragino Sans','Yu Gothic',system-ui,sans-serif;
+color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px 16px;background:radial-gradient(ellipse at 50% 0,#2a0a0e,transparent 62%),var(--bg);color:var(--ink);font-family:var(--body);line-height:1.65}
+.wrap{width:100%;max-width:520px}
+.card{position:relative;overflow:hidden;background:linear-gradient(160deg,#18181b,#101012);border:1px solid var(--line);border-radius:20px;padding:30px 26px;text-align:center;box-shadow:0 20px 60px #e0111f1f}
+.card::after{content:"認証";position:absolute;right:-8px;bottom:-34px;font-family:var(--head);font-weight:800;font-size:7rem;opacity:.05;pointer-events:none}
+.logo{width:84px;height:84px;border-radius:50%;border:3px solid var(--red);box-shadow:0 0 40px #e0111f66}
+.eyebrow{font-family:var(--head);font-size:.72rem;letter-spacing:.3em;color:var(--red2);font-weight:700;margin:14px 0 2px}
+h1{font-family:var(--head);font-weight:800;font-size:1.9rem;margin:0 0 10px}
+p{color:var(--mute);margin:0 0 14px}
+.btn{display:inline-block;padding:12px 26px;border-radius:99px;background:var(--red);color:#fff;text-decoration:none;font-family:var(--head);font-weight:700;font-size:.92rem;border:2px solid var(--red);cursor:pointer}
+.btn:hover{box-shadow:0 8px 24px #e0111f55}
+.btn.ghost{background:transparent;border-color:#ffffff40}
+.btn:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
+.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+.me{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;color:var(--ink)}
+.me img{width:40px;height:40px;border-radius:50%;border:2px solid var(--red)}
+.msg{margin:0 0 14px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);color:var(--ink);text-align:left}
+.msg.ok{border-color:var(--ok)}
+.msg.err{border-color:var(--red2)}
+.steps{text-align:left;color:var(--mute);margin:0 0 16px;padding-left:20px}
+.cf{display:flex;justify-content:center;margin:0 0 14px;min-height:65px}
+small{color:var(--mute)}
+a.back{display:inline-block;margin-top:16px;color:var(--mute);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <img class="logo" src="data:image/jpeg;base64,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" alt="Logo de JAPAN Society">
+    <p class="eyebrow">JAPAN SOCIETY™</p>
+    <h1>Verificación</h1>
+    <div id="vf"><p>Cargando…</p></div>
+  </div>
+  <p style="text-align:center;margin-top:14px"><a class="back" href="/">← Volver a la web</a></p>
+</div>
+<script>
+(function(){
+  var root=document.getElementById('vf');
+  var INVITE='https://discord.gg/PUWcrVAjgJ';
+  var siteKey='',token='',widget=null;
+  function el(tag,attrs,kids){
+    var e=document.createElement(tag);
+    Object.keys(attrs||{}).forEach(function(k){if(k==='text')e.textContent=attrs[k];else e.setAttribute(k,attrs[k])});
+    (kids||[]).forEach(function(c){e.appendChild(typeof c==='string'?document.createTextNode(c):c)});
+    return e;
+  }
+  function show(nodes){while(root.firstChild)root.removeChild(root.firstChild);nodes.forEach(function(n){root.appendChild(n)})}
+  function msg(text,cls){return el('div',{'class':'msg '+(cls||''),text:text})}
+  function link(text,href,cls,newTab){
+    var a=el('a',{'class':cls||'btn',href:href,text:text});
+    if(newTab){a.setAttribute('target','_blank');a.setAttribute('rel','noopener')}
+    return a;
+  }
+  function api(path,opts){
+    opts=opts||{};opts.credentials='same-origin';
+    return fetch(path,opts).then(function(r){return r.json().then(function(j){return {status:r.status,data:j}})});
+  }
+
+  function unavailable(){
+    show([msg('La verificación no está disponible en este momento. Inténtalo de nuevo en unos minutos o avisa al staff por Discord.','err'),link('Ir al Discord',INVITE,'btn ghost',true)]);
+  }
+  function loggedOut(note){
+    var nodes=[];
+    if(note)nodes.push(msg(note,'err'));
+    nodes.push(el('p',{text:'Para entrar al resto del servidor, inicia sesión con tu cuenta de Discord y comprueba que eres una persona. Solo usamos tu nombre e ID de Discord.'}));
+    nodes.push(el('div',{'class':'row'},[link('Iniciar sesión con Discord','/api/login?next=verify'),link('Unirme al servidor',INVITE,'btn ghost',true)]));
+    show(nodes);
+  }
+  function loadTurnstile(container,onToken){
+    return new Promise(function(resolve,reject){
+      if(window.turnstile){resolve();return}
+      var s=document.createElement('script');
+      s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      s.async=true;s.onload=resolve;s.onerror=function(){reject(new Error('turnstile'))};
+      document.head.appendChild(s);
+    }).then(function(){
+      widget=window.turnstile.render(container,{sitekey:siteKey,theme:'dark',
+        callback:function(t){onToken(t)},'expired-callback':function(){onToken('')},'error-callback':function(){onToken('')}});
+    });
+  }
+  function resetWidget(){
+    token='';
+    try{if(widget!==null&&window.turnstile)window.turnstile.reset(widget)}catch(e){}
+  }
+
+  function done(data){
+    var nodes=[];
+    if(data.status==='ok'){
+      nodes.push(msg(data.message||'¡Listo! Ya estás verificado.','ok'));
+      nodes.push(link('Volver a Discord','https://discord.com/app','btn',true));
+    }else{
+      nodes.push(msg(data.message||'No se pudo completar la verificación.','err'));
+      var row=el('div',{'class':'row'});
+      if(data.code==='not_member')row.appendChild(link('Unirme al servidor',INVITE,'btn',true));
+      var again=el('button',{'class':'btn ghost',type:'button',text:'Intentar de nuevo'});
+      again.addEventListener('click',function(){resetWidget();init(true)});
+      row.appendChild(again);
+      nodes.push(row);
+    }
+    show(nodes);
+  }
+  function poll(id,tries){
+    return api('/api/verify?id='+encodeURIComponent(id)).then(function(r){
+      if(r.status===200&&r.data.status&&r.data.status!=='pending')return r.data;
+      if(tries>=30)return {status:'error',message:'El bot está tardando en responder. Revisa Discord en un momento: si ya te dio el rol, estás verificado.'};
+      return new Promise(function(res){setTimeout(res,2000)}).then(function(){return poll(id,tries+1)});
+    });
+  }
+
+  function form(user){
+    var status=el('div');
+    var btn=el('button',{'class':'btn',type:'button',text:'Verificarme'});
+    var cf=el('div',{'class':'cf'});
+    if(siteKey)btn.disabled=true;
+    btn.addEventListener('click',function(){
+      btn.disabled=true;
+      while(status.firstChild)status.removeChild(status.firstChild);
+      status.appendChild(msg('Verificando… esto puede tardar unos segundos.'));
+      api('/api/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:token})})
+      .then(function(r){
+        if(r.status===401){loggedOut('Tu sesión expiró. Inicia sesión de nuevo.');return null}
+        if(r.status!==202)throw new Error(r.data.message||'No se pudo iniciar la verificación.');
+        return poll(r.data.job_id,0).then(done);
+      })
+      .catch(function(e){
+        while(status.firstChild)status.removeChild(status.firstChild);
+        status.appendChild(msg(e.message||'No se pudo iniciar la verificación.','err'));
+        resetWidget();btn.disabled=!!siteKey;
+      });
+    });
+    var nodes=[
+      el('div',{'class':'me'},[el('img',{src:user.avatar,alt:'Tu avatar de Discord'}),el('span',{text:'Hola, '+user.name})]),
+      el('ol',{'class':'steps'},[el('li',{text:siteKey?'Resuelve la comprobación de abajo.':'Pulsa el botón de abajo.'}),el('li',{text:'Recibirás el rol de verificado en unos segundos.'})])
+    ];
+    if(siteKey)nodes.push(cf);
+    nodes.push(status);
+    nodes.push(el('div',{'class':'row'},[btn]));
+    nodes.push(el('p',{'class':'small'},[el('small',{text:'¿No eres '+user.name+'? '}),link('Cerrar sesión','/api/logout','back')]));
+    show(nodes);
+    if(siteKey){
+      loadTurnstile(cf,function(t){token=t;btn.disabled=!t}).catch(function(){
+        status.appendChild(msg('No se pudo cargar la comprobación anti-bots. Recarga la página.','err'));
+      });
+    }
+  }
+
+  function init(skipKey){
+    var failed=new URLSearchParams(location.search).get('login')==='error';
+    var keyReq=skipKey?Promise.resolve():api('/api/verify').then(function(r){if(r.status===200)siteKey=r.data.turnstile_site_key||''}).catch(function(){});
+    return keyReq.then(function(){return api('/api/me')}).then(function(r){
+      if(r.status!==200)return unavailable();
+      if(!r.data.logged)return loggedOut(failed?'No pudimos iniciar tu sesión. Inténtalo de nuevo.':'');
+      form(r.data);
+    }).catch(unavailable);
+  }
+  init(false);
+})();
+</script>
+</body>
+</html>
