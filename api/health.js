@@ -5,7 +5,7 @@
  * aunque ese archivo esté desactualizado.
  */
 const EXPECTED_EXPORTS = [
-  'VERSION', 'STATUS_KEY', 'OUTBOX_KEY', 'MSGSUM_KEY', 'BOARD_PREFIX', 'TRES_PREFIX', 'messageSummary', 'NEXT_TARGETS', 'redisPipeline', 'hashObject',
+  'VERSION', 'VERIFY_RES_PREFIX', 'clientIp', 'STATUS_KEY', 'OUTBOX_KEY', 'MSGSUM_KEY', 'BOARD_PREFIX', 'TRES_PREFIX', 'messageSummary', 'NEXT_TARGETS', 'redisPipeline', 'hashObject',
   'isOwner', 'checkOrigin', 'readBody', 'redisInfo',
 ];
 
@@ -33,6 +33,8 @@ module.exports = async function handler(req, res) {
   ['DISCORD_CLIENT_ID', 'DISCORD_CLIENT_SECRET', 'SESSION_SECRET', 'SITE_URL', 'GUILD_ID', 'OWNER_IDS'].forEach(function (name) {
     out.env[name] = !!process.env[name];
   });
+  out.env.TURNSTILE_SITE_KEY_opcional = !!process.env.TURNSTILE_SITE_KEY;
+  out.env.TURNSTILE_SECRET_KEY_opcional = !!process.env.TURNSTILE_SECRET_KEY;
   out.env.SESSION_SECRET_32_o_mas = String(process.env.SESSION_SECRET || '').length >= 32;
   out.env.SITE_URL_correcta = /^https:\/\/[^/\s]+$/.test(String(process.env.SITE_URL || ''));
   out.env.OWNER_IDS_cantidad = String(process.env.OWNER_IDS || '').split(',').map(function (s) { return s.trim(); }).filter(Boolean).length;
