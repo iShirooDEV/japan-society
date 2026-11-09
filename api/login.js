@@ -12,9 +12,9 @@ module.exports = async function handler(req, res) {
       client_id: need('DISCORD_CLIENT_ID'),
       redirect_uri: siteUrl() + '/api/callback',
       response_type: 'code',
-      scope: 'identify',
+      scope: next === 'dashboard' ? 'identify guilds' : 'identify',
       state: state,
-      prompt: 'none',
+      prompt: next === 'dashboard' ? 'consent' : 'none',
     });
     redirect(res, 'https://discord.com/oauth2/authorize?' + params.toString());
   } catch (err) {
