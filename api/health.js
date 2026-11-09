@@ -5,7 +5,7 @@
  * aunque ese archivo esté desactualizado.
  */
 const EXPECTED_EXPORTS = [
-  'VERSION', 'VERIFY_RES_PREFIX', 'clientIp', 'STATUS_KEY', 'OUTBOX_KEY', 'MSGSUM_KEY', 'BOARD_PREFIX', 'TRES_PREFIX', 'messageSummary', 'NEXT_TARGETS', 'redisPipeline', 'hashObject',
+  'VERSION', 'DASH_PREFIX', 'BOT_GUILDS_KEY', 'UG_PREFIX', 'CRES_PREFIX', 'DASH_KEYS', 'VERIFY_RES_PREFIX', 'clientIp', 'STATUS_KEY', 'OUTBOX_KEY', 'MSGSUM_KEY', 'BOARD_PREFIX', 'TRES_PREFIX', 'messageSummary', 'NEXT_TARGETS', 'redisPipeline', 'hashObject',
   'isOwner', 'checkOrigin', 'readBody', 'redisInfo',
 ];
 
