@@ -99,7 +99,7 @@ select:focus,input:focus{outline:none;border-color:var(--red)}
 .head2 h1{font-family:var(--head);font-size:1.4rem;margin:0}
 .lnk{background:none;border:0;color:var(--mute);cursor:pointer;font:inherit;padding:0}
 .lnk:hover{color:var(--red2)}
-</style>
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.chip{background:#1d0f12;border:1px solid var(--line);color:var(--ink);border-radius:99px;padding:3px 10px;font:inherit;font-size:.78rem;cursor:pointer}.chip:hover{border-color:var(--red)}details.sec>summary{cursor:pointer;font-family:var(--head);font-weight:700;margin-bottom:6px}textarea{width:100%;background:#0d0d0f;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:9px 12px;font:inherit;min-height:90px}</style>
 </head>
 <body>
 <div id="app"><div class="center"><p>Cargando…</p></div></div>
@@ -107,8 +107,9 @@ select:focus,input:focus{outline:none;border-color:var(--red)}
 (function(){
   var app=document.getElementById('app');
   var LOGO='data:image/jpeg;base64,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';
+  var BOTS=[['japan','JAPAN Society™'],['nino','Nino Nakano']];
   var ASSIGN={miembro_rol:1,verificado_rol:1,noverificado_rol:1};
-  var state={me:null,guilds:[],missing:[],invite:'',guild:null,data:null,fresh:true,age:0,edits:{},notice:null,busy:false};
+  var state={me:null,bot:'japan',guilds:[],missing:[],invite:'',guild:null,data:null,fresh:true,age:0,edits:{},notice:null,busy:false};
   var ui={};
 
   function el(tag,attrs,kids){
@@ -129,11 +130,15 @@ select:focus,input:focus{outline:none;border-color:var(--red)}
     var h=Math.floor(m/60);
     return h<24?h+' h '+(m%60)+' min':Math.floor(h/24)+' d';
   }
+  function bq(){return state.bot==='japan'?'':'&bot='+encodeURIComponent(state.bot)}
   function api(path,opts){
     opts=opts||{};opts.credentials='same-origin';
     return fetch(path,opts).then(function(r){return r.json().then(function(j){return {status:r.status,data:j}})});
   }
-  function post(body){return api('/api/dashboard',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})}
+  function post(body){
+    if(state.bot!=='japan')body.bot=state.bot;
+    return api('/api/dashboard',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  }
   function link(text,href,cls,tab){var a=el('a',{'class':cls||'btn',href:href,text:text});if(tab){a.setAttribute('target','_blank');a.setAttribute('rel','noopener')}return a}
 
   function screen(title,text,links){
@@ -153,16 +158,27 @@ select:focus,input:focus{outline:none;border-color:var(--red)}
     if(g.icon)return el('img',{'class':'gic',src:'https://cdn.discordapp.com/icons/'+g.id+'/'+g.icon+'.png?size=64',alt:''});
     return el('div',{'class':'gic',text:(g.name||'?').slice(0,1).toUpperCase()});
   }
+  function botTabs(){
+    var row=el('div',{'class':'tabs'});
+    BOTS.forEach(function(b){
+      var t=el('button',{'class':'tab'+(state.bot===b[0]?' on':''),type:'button',text:b[1]});
+      t.addEventListener('click',function(){if(state.bot!==b[0]){state.bot=b[0];loadGuilds()}});
+      row.appendChild(t);
+    });
+    return row;
+  }
 
   /* ---------- servidores ---------- */
+  function botName(){return state.bot==='nino'?'Nino Nakano':'el bot oficial'}
   function showGuilds(){
     clear(app);
     app.appendChild(topbar());
     var box=el('div',{'class':'wrapd'});
     box.appendChild(el('div',{'class':'head2'},[el('h1',{text:'Tus servidores'})]));
-    box.appendChild(el('p',{'class':'muted',text:'Estos son los servidores donde puedes gestionar el servidor y donde está el bot.'}));
+    box.appendChild(botTabs());
+    box.appendChild(el('p',{'class':'muted',text:'Servidores donde puedes gestionar el servidor y donde está '+botName()+'.'}));
     if(!state.guilds.length){
-      box.appendChild(el('div',{'class':'sec'},[el('p',{'class':'muted',text:'El bot todavía no está en ninguno de tus servidores.'}),link('Invitar al bot',state.invite,'btn',true)]));
+      box.appendChild(el('div',{'class':'sec'},[el('p',{'class':'muted',text:botName()==='Nino Nakano'?'Nino todavía no está en ninguno de tus servidores.':'El bot todavía no está en ninguno de tus servidores.'}),link('Invitar al bot',state.invite,'btn',true)]));
     }else{
       var grid=el('div',{'class':'gcards'});
       state.guilds.forEach(function(g){
@@ -182,51 +198,114 @@ select:focus,input:focus{outline:none;border-color:var(--red)}
     }
     app.appendChild(box);
   }
+  function loadGuilds(){
+    return api('/api/dashboard?action=guilds'+bq()).then(function(g){
+      if(g.status===403&&g.data.error==='relogin')return needLogin();
+      if(g.status!==200)return screen('No disponible',(g.data&&g.data.message)||'El dashboard no está disponible en este momento (código '+g.status+'). Abre /api/health para ver qué falta.',[{href:'/api/health',text:'Ver diagnóstico',ghost:true},{href:'/',text:'Volver a la web',ghost:true}]);
+      state.guilds=g.data.guilds||[];state.missing=g.data.missing||[];state.invite=g.data.invite_url||'';
+      showGuilds();
+    }).catch(function(){screen('No disponible','El dashboard no está disponible en este momento.',[{href:'/',text:'Volver a la web',ghost:true}])});
+  }
 
-  /* ---------- configuración de un servidor ---------- */
+  /* ---------- valores y cambios ---------- */
+  function optByKey(k){var o=(state.data&&state.data.options)||[];for(var i=0;i<o.length;i++)if(o[i].key===k)return o[i];return null}
+  function isList(opt){return opt.kind==='roles'||opt.kind==='channels'||opt.kind==='textlist'}
   function currentOf(opt){
     var v=state.data&&state.data.config?state.data.config[opt.key]:undefined;
     if(opt.kind==='days')return v?String(v):'0';
+    if(opt.kind==='number')return String(v===undefined?(opt.default===undefined?0:opt.default):v);
+    if(isList(opt))return (v||[]).map(String);
     return v?String(v):'';
   }
+  function valueOf(opt){return state.edits[opt.key]!==undefined?state.edits[opt.key]:currentOf(opt)}
+  function same(a,b){
+    if(Array.isArray(a)||Array.isArray(b))return JSON.stringify((a||[]).slice().sort())===JSON.stringify((b||[]).slice().sort());
+    return String(a)===String(b);
+  }
   function setEdit(opt,value){
-    var norm=opt.kind==='days'?String(Math.max(0,Math.min(365,parseInt(value,10)||0))):String(value||'');
-    if(norm===currentOf(opt))delete state.edits[opt.key];
-    else state.edits[opt.key]=opt.kind==='days'?Number(norm):norm;
+    var norm=value;
+    if(opt.kind==='days'||opt.kind==='number'){
+      var min=opt.kind==='days'?0:(opt.min===undefined?0:opt.min),max=opt.kind==='days'?365:(opt.max===undefined?100000:opt.max);
+      norm=Math.max(min,Math.min(max,parseInt(value,10)||0));
+    }
+    if(same(norm,currentOf(opt)))delete state.edits[opt.key];
+    else state.edits[opt.key]=(opt.kind==='days'||opt.kind==='number')?Number(norm):norm;
     renderBar();
   }
+  function mark(row,opt){row.setAttribute('class','opt'+(state.edits[opt.key]!==undefined?' chg':''))}
   function optionLabel(opt,item){
     if(opt.kind==='category')return '📁 '+item.name;
-    if(opt.kind==='role')return '@ '+item.name+((ASSIGN[opt.key]&&!item.assignable)?' — el bot no puede asignarlo':'');
+    if(opt.kind==='role'||opt.kind==='roles')return '@ '+item.name+((ASSIGN[opt.key]||opt.key==='verified_role'||opt.key==='unverified_role')&&!item.assignable?' — el bot no puede asignarlo':'');
     return '# '+item.name+(item.parent?' ('+item.parent+')':'');
+  }
+  function itemsFor(opt){
+    if(opt.kind==='role'||opt.kind==='roles')return state.data.roles;
+    return state.data.channels.filter(function(c){return c.kind===(opt.kind==='category'?'category':'text')});
   }
   function control(opt,row){
     var cur=currentOf(opt);
-    if(opt.kind==='days'){
-      var inp=el('input',{type:'number',min:'0',max:'365',value:cur});
-      inp.addEventListener('change',function(){setEdit(opt,inp.value);row.setAttribute('class','opt'+(state.edits[opt.key]!==undefined?' chg':''))});
+    if(opt.kind==='days'||opt.kind==='number'){
+      var inp=el('input',{type:'number',min:String(opt.kind==='days'?0:opt.min),max:String(opt.kind==='days'?365:opt.max),value:cur});
+      inp.addEventListener('change',function(){setEdit(opt,inp.value);mark(row,opt)});
       return inp;
     }
-    var items=opt.kind==='role'?state.data.roles:state.data.channels.filter(function(c){return c.kind===(opt.kind==='category'?'category':'text')});
+    if(opt.kind==='state'||opt.kind==='choice'){
+      var s0=el('select',{});
+      (opt.choices||[]).forEach(function(c){s0.appendChild(el('option',{value:c.value,text:c.label}))});
+      s0.value=cur;
+      s0.addEventListener('change',function(){setEdit(opt,s0.value);mark(row,opt)});
+      return s0;
+    }
+    if(opt.kind==='textlist'){
+      var ta=el('textarea',{rows:'5',placeholder:opt.hint||'',value:cur.join('\n')});
+      ta.addEventListener('input',function(){
+        var items=String(ta.value||'').split('\n').map(function(x){return x.trim()}).filter(function(x){return x});
+        setEdit(opt,items);mark(row,opt);
+      });
+      return ta;
+    }
+    var items=itemsFor(opt);
+    if(opt.kind==='roles'||opt.kind==='channels'){
+      var box=el('div',{});
+      var chips=el('div',{'class':'chips'});
+      var add=el('select',{});
+      function nameOf(id){for(var i=0;i<items.length;i++)if(items[i].id===id)return optionLabel({kind:opt.kind,key:opt.key},items[i]);return '⚠️ Ya no existe ('+id+')'}
+      function draw(){
+        clear(chips);clear(add);
+        var chosen=valueOf(opt);
+        add.appendChild(el('option',{value:'',text:'+ Añadir…'}));
+        items.forEach(function(it){if(chosen.indexOf(it.id)===-1)add.appendChild(el('option',{value:it.id,text:optionLabel({kind:opt.kind,key:opt.key},it)}))});
+        add.value='';
+        chosen.forEach(function(id){
+          var x=el('button',{'class':'chip',type:'button',text:nameOf(id)+' ✕'});
+          x.addEventListener('click',function(){setEdit(opt,chosen.filter(function(c){return c!==id}));mark(row,opt);draw()});
+          chips.appendChild(x);
+        });
+        if(!chosen.length)chips.appendChild(el('span',{'class':'muted',text:'Ninguno'}));
+      }
+      add.addEventListener('change',function(){if(add.value){setEdit(opt,valueOf(opt).concat([add.value]));mark(row,opt);draw()}});
+      draw();box.appendChild(chips);box.appendChild(add);
+      return box;
+    }
     var sel=el('select',{});
     sel.appendChild(el('option',{value:'',text:'— Sin configurar —'}));
     var found=false;
     items.forEach(function(it){
       var o=el('option',{value:it.id,text:optionLabel(opt,it)});
-      if(opt.kind==='role'&&ASSIGN[opt.key]&&!it.assignable&&it.id!==cur)o.setAttribute('disabled','disabled');
+      if((opt.kind==='role')&&(ASSIGN[opt.key]||opt.key==='verified_role'||opt.key==='unverified_role')&&!it.assignable&&it.id!==cur)o.setAttribute('disabled','disabled');
       if(it.id===cur)found=true;
       sel.appendChild(o);
     });
     if(cur&&!found)sel.appendChild(el('option',{value:cur,text:'⚠️ Ya no existe (ID '+cur+')'}));
     sel.value=cur;
-    sel.addEventListener('change',function(){setEdit(opt,sel.value);row.setAttribute('class','opt'+(state.edits[opt.key]!==undefined?' chg':''))});
+    sel.addEventListener('change',function(){setEdit(opt,sel.value);mark(row,opt)});
     return sel;
   }
   function renderBar(){
     if(!ui.bar)return;
     clear(ui.bar);
     var n=Object.keys(state.edits).length;
-    var info=state.notice?el('span',{'class':state.notice.err?'':'',text:state.notice.text}):el('span',{text:n?n+' cambio(s) sin guardar':'Sin cambios'});
+    var info=el('span',{text:state.notice?state.notice.text:(n?n+' cambio(s) sin guardar':'Sin cambios')});
     var discard=el('button',{'class':'btn ghost',type:'button',text:'Descartar'});
     discard.addEventListener('click',function(){state.edits={};state.notice=null;renderConfig()});
     var save=el('button',{'class':'btn',type:'button',text:'Guardar cambios'});
@@ -235,14 +314,14 @@ select:focus,input:focus{outline:none;border-color:var(--red)}
     [info,discard,save].forEach(function(x){ui.bar.appendChild(x)});
   }
   function pollJob(id,tries){
-    return api('/api/dashboard?action=jobresult&id='+encodeURIComponent(id)).then(function(r){
+    return api('/api/dashboard?action=jobresult&id='+encodeURIComponent(id)+bq()).then(function(r){
       if(r.status===200&&r.data.status&&r.data.status!=='pending')return r.data;
       if(tries>=15)return {status:'error',message:'El bot tardó demasiado en responder. Revisa que esté encendido y actualiza la página.'};
       return new Promise(function(res){setTimeout(res,3000)}).then(function(){return pollJob(id,tries+1)});
     });
   }
   function run(body,okText){
-    state.busy=true;state.notice={err:false,text:'Enviando al bot… (puede tardar hasta ~20 segundos)'};renderBar();
+    state.busy=true;state.notice={err:false,text:'Enviando al bot… (puede tardar hasta ~30 segundos)'};renderBar();
     return post(body).then(function(r){
       if(r.status===401||r.status===403&&r.data.error==='relogin'){needLogin();return null}
       if(r.status!==202)throw new Error(r.data.message||'No se pudo enviar la acción.');
@@ -250,7 +329,8 @@ select:focus,input:focus{outline:none;border-color:var(--red)}
     }).then(function(res){
       state.busy=false;
       if(!res)return null;
-      state.notice={err:res.status!=='ok',text:(res.status==='ok'?'✅ ':'❌ ')+(res.message||okText)};
+      var warn=(res.warnings&&res.warnings.length)?' ⚠️ '+res.warnings.join(' · '):'';
+      state.notice={err:res.status!=='ok',text:(res.status==='ok'?'✅ ':'❌ ')+(res.message||okText)+warn};
       return res;
     }).catch(function(e){state.busy=false;state.notice={err:true,text:'❌ '+(e.message||'No se pudo completar la acción.')};return null});
   }
@@ -259,12 +339,12 @@ select:focus,input:focus{outline:none;border-color:var(--red)}
     run({action:'save',guild:state.guild.id,changes:changes},'Cambios guardados.').then(function(res){
       if(res&&res.status==='ok'){
         Object.keys(changes).forEach(function(k){
-          var v=changes[k];
-          if(v===''||v===0)delete state.data.config[k];else state.data.config[k]=v;
+          var v=changes[k],o=optByKey(k);
+          if(v===''||v===null||(o&&o.kind==='days'&&v===0))delete state.data.config[k];else state.data.config[k]=v;
         });
         state.edits={};
         renderConfig();
-        setTimeout(function(){if(!Object.keys(state.edits).length)loadConfig()},18000);
+        setTimeout(function(){if(!Object.keys(state.edits).length)loadConfig()},25000);
       }else renderBar();
     });
   }
@@ -294,6 +374,21 @@ select:focus,input:focus{outline:none;border-color:var(--red)}
       out
     ]);
   }
+  function profilesCard(){
+    var row=el('div',{'class':'actions'});
+    state.data.profiles.forEach(function(p){
+      var b=el('button',{'class':'btn ghost',type:'button',text:p.label});
+      b.addEventListener('click',function(){
+        if(!window.confirm('¿Aplicar el perfil '+p.label+'? Cambia el estado de TODOS los módulos de Anti-Raid y Auto-Mod.'))return;
+        run({action:'profile',guild:state.guild.id,profile:p.value},'Perfil aplicado.').then(function(res){
+          renderBar();
+          if(res&&res.status==='ok')setTimeout(function(){if(!Object.keys(state.edits).length)loadConfig()},25000);
+        });
+      });
+      row.appendChild(b);
+    });
+    return el('div',{'class':'sec'},[el('h2',{text:'Perfiles de protección'}),el('p',{'class':'muted',text:'Cambian el estado de todos los módulos de una vez. Después puedes ajustar cada uno abajo.'}),row]);
+  }
   function renderConfig(){
     clear(ui.main);
     if(!state.data){
@@ -303,10 +398,12 @@ select:focus,input:focus{outline:none;border-color:var(--red)}
       ui.bar=null;return;
     }
     if(!state.fresh)ui.main.appendChild(el('div',{'class':'banner',text:'Los datos son de hace '+fmtDur(state.age)+': el bot puede estar apagado.'}));
+    if(state.data.profiles&&state.data.profiles.length)ui.main.appendChild(profilesCard());
     var groups=[],byGroup={};
     state.data.options.forEach(function(o){if(!byGroup[o.group]){byGroup[o.group]=[];groups.push(o.group)}byGroup[o.group].push(o)});
-    groups.forEach(function(g){
-      var sec=el('div',{'class':'sec'},[el('h2',{text:g})]);
+    groups.forEach(function(g,i){
+      var sec=el('details',{'class':'sec'},[el('summary',{text:g+' ('+byGroup[g].length+')'})]);
+      if(i<3||groups.length<=5)sec.setAttribute('open','open');
       byGroup[g].forEach(function(opt){
         var row=el('div',{'class':'opt'+(state.edits[opt.key]!==undefined?' chg':'')});
         row.appendChild(el('div',{},[el('div',{'class':'lbl',text:opt.label}),el('div',{'class':'hint',text:opt.hint})]));
@@ -315,13 +412,13 @@ select:focus,input:focus{outline:none;border-color:var(--red)}
       });
       ui.main.appendChild(sec);
     });
-    ui.main.appendChild(panelCard());
+    if(state.bot==='japan')ui.main.appendChild(panelCard());
     ui.bar=el('div',{'class':'bar'});
     ui.main.appendChild(ui.bar);
     renderBar();
   }
   function loadConfig(){
-    return api('/api/dashboard?action=config&guild='+encodeURIComponent(state.guild.id)).then(function(r){
+    return api('/api/dashboard?action=config&guild='+encodeURIComponent(state.guild.id)+bq()).then(function(r){
       if(r.status===401||(r.status===403&&r.data.error==='relogin')){needLogin();return}
       if(r.status!==200){clear(ui.main);ui.main.appendChild(el('div',{'class':'err',text:r.data.message||'No se pudo cargar la configuración.'}));return}
       state.data=r.data.data;state.fresh=!!r.data.fresh;state.age=r.data.age_seconds;
@@ -336,7 +433,7 @@ select:focus,input:focus{outline:none;border-color:var(--red)}
     back.addEventListener('click',showGuilds);
     ui.main=el('div',{});
     app.appendChild(el('div',{'class':'wrapd'},[
-      el('div',{'class':'head2'},[icon(g),el('h1',{text:g.name}),back]),
+      el('div',{'class':'head2'},[icon(g),el('h1',{text:g.name}),el('span',{'class':'badge',text:state.bot==='nino'?'Nino Nakano':'Bot oficial'}),back]),
       ui.main
     ]));
     ui.main.appendChild(el('p',{'class':'muted',text:'Cargando…'}));
@@ -353,12 +450,7 @@ select:focus,input:focus{outline:none;border-color:var(--red)}
       if(r.status!==200)return screen('No disponible','El dashboard no está disponible en este momento.',[{href:'/',text:'Volver a la web',ghost:true}]);
       if(!r.data.logged)return needLogin(failed?'No pudimos iniciar tu sesión. Inténtalo de nuevo.':'');
       state.me=r.data;
-      return api('/api/dashboard?action=guilds').then(function(g){
-        if(g.status===403&&g.data.error==='relogin')return needLogin();
-        if(g.status!==200)return screen('No disponible',(g.data&&g.data.message)||'El dashboard no está disponible en este momento (código '+g.status+'). Abre /api/health para ver qué falta.',[{href:'/api/health',text:'Ver diagnóstico',ghost:true},{href:'/',text:'Volver a la web',ghost:true}]);
-        state.guilds=g.data.guilds||[];state.missing=g.data.missing||[];state.invite=g.data.invite_url||'';
-        showGuilds();
-      });
+      return loadGuilds();
     }).catch(function(){screen('No disponible','El dashboard no está disponible en este momento.',[{href:'/',text:'Volver a la web',ghost:true}])});
   }
   init();
